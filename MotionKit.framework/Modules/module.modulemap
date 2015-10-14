@@ -1,0 +1,10 @@
+framework module MotionKit {
+  umbrella header "MotionKit.h"
+
+  export *
+  module * { export * }
+}
+
+module MotionKit.Swift {
+    header "MotionKit-Swift.h"
+}
