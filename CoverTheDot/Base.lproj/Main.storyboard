@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GO!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QRB-SQ-xlC">
-                                <rect key="frame" x="191" y="229" width="218" height="141"/>
+                                <rect key="frame" x="191" y="229" width="217.5" height="141"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="118"/>
                                 <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -26,8 +26,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QsI-j5-dRN">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time Remaining: 60 Score: 500" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v1R-5o-vmT">
-                                        <rect key="frame" x="180" y="571" width="241" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time Remaining: 60 Score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v1R-5o-vmT">
+                                        <rect key="frame" x="190" y="571.5" width="220.5" height="20.5"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="aH5-2q-chW"/>
                                         </constraints>
@@ -48,8 +48,6 @@
                                 </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="kW1-El-kUY" appends="YES" id="DAj-Wp-7tW"/>
-                                    <outletCollection property="gestureRecognizers" destination="lPc-84-jyD" appends="YES" id="dgI-Lm-UUi"/>
-                                    <outletCollection property="gestureRecognizers" destination="L6H-18-WjI" appends="YES" id="Dkg-IW-loG"/>
                                 </connections>
                             </view>
                         </subviews>
@@ -66,8 +64,6 @@
                     <connections>
                         <outlet property="gameUpdateLabel" destination="v1R-5o-vmT" id="iyV-jc-IHo"/>
                         <outlet property="gameView" destination="QsI-j5-dRN" id="LbC-z9-sTw"/>
-                        <outlet property="longPressGesture" destination="lPc-84-jyD" id="80m-sN-GSs"/>
-                        <outlet property="panGesture" destination="L6H-18-WjI" id="iBO-ch-Wwj"/>
                         <outlet property="tapGesture" destination="kW1-El-kUY" id="oIF-4e-gIx"/>
                     </connections>
                 </viewController>
@@ -77,16 +73,6 @@
                         <action selector="tap:" destination="BYZ-38-t0r" id="R6v-lJ-sxk"/>
                     </connections>
                 </tapGestureRecognizer>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="lPc-84-jyD">
-                    <connections>
-                        <action selector="longPress:" destination="BYZ-38-t0r" id="98Q-8M-okR"/>
-                    </connections>
-                </pongPressGestureRecognizer>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="L6H-18-WjI">
-                    <connections>
-                        <action selector="pan:" destination="BYZ-38-t0r" id="tCg-6z-eVt"/>
-                    </connections>
-                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="245" y="337"/>
         </scene>

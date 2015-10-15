@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import MotionKit
+//import MotionKit
 
 class ViewController: UIViewController, UIDynamicAnimatorDelegate {
 
@@ -19,28 +19,25 @@ class ViewController: UIViewController, UIDynamicAnimatorDelegate {
         }
     }
     
-    
-    var currentRound = GameRound(gameDuration: 60) {
+    var updateTimer = NSTimer()
+    var currentRound : GameRound! {
         didSet {
-//            NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("score:"), userInfo: nil, repeats: true)
         }
     }
-//    func score(timer: NSTimer) {
-//        print("Score match")
-//        currentRound.updateScore {
-//            [unowned self]
-//            (var score) -> Int in
-//            
-//            self.blocksCoveringDot(self.dotView) {
-//                blockCount in
-//                score += blockCount
-//            }
-//            
-//            self.gameUpdateLabel.text = "Time Remaining: \(self.currentRound.gameTimer.timeInterval) Score: \(score)"
-//            
-//            return score
-//        }
-//    }
+    func blocksCoveringDot(dotView: UIView, getBlockCount: (Int->Void)? = nil) {
+        
+        var blockCount = 0
+        
+        let subviewsInView = gameView.subviews
+        for view in subviewsInView {
+            if !dotView.isEqual(view) {
+                if CGRectIntersectsRect(dotView.frame, view.frame) {
+                    ++blockCount
+                }
+            }
+        }
+        getBlockCount?(blockCount)
+    }
     
     lazy var animator: UIDynamicAnimator = {
         let lazyAnimator = UIDynamicAnimator(referenceView: self.gameView)
@@ -74,13 +71,17 @@ class ViewController: UIViewController, UIDynamicAnimatorDelegate {
         static let Attachment = "Attachment"
     }
     
-    
-    
     func dynamicAnimatorDidPause(animator: UIDynamicAnimator) {
         
     }
     func dynamicAnimatorWillResume(animator: UIDynamicAnimator) {
-        
+        let motionKit = AppDelegate.Motion.Kit
+        motionKit.getAccelerometerValues(){
+            [unowned self]
+            (x: Double, y: Double, z: Double) in
+            
+            self.blockBehavior.gravity.gravityDirection = CGVector(dx: x, dy: -y)
+        }
     }
     
     var dotView: DotView! {
@@ -132,42 +133,60 @@ class ViewController: UIViewController, UIDynamicAnimatorDelegate {
         }
     }
     
-    @IBOutlet var longPressGesture: UILongPressGestureRecognizer! {
-        didSet {
-        }
-    }
-    @IBAction func longPress(sender: UILongPressGestureRecognizer) {
-    }
+//    @IBOutlet var longPressGesture: UILongPressGestureRecognizer! {
+//        didSet {
+//        }
+//    }
+//    @IBAction func longPress(sender: UILongPressGestureRecognizer) {
+//    }
     
-    @IBOutlet var panGesture: UIPanGestureRecognizer! {
-        didSet {
-        }
-    }
+//    @IBOutlet var panGesture: UIPanGestureRecognizer! {
+//        didSet {
+//        }
+//    }
+//    
+//    @IBAction func pan(sender: UIPanGestureRecognizer) {
+//        let gesturePoint = sender.locationInView(gameView)
+//        switch sender.state {
+//        case .Began:
+//            print("Handle pan began")
+//            if !currentBlocks.isEmpty {
+//                attachment = UIAttachmentBehavior(item: currentBlocks[currentBlocks.count-1], attachedToAnchor: gesturePoint)
+//            }
+//        case .Changed:
+//            print("Handle pan changed")
+//            attachment?.anchorPoint = gesturePoint
+//        case .Ended:
+//            print("Handle pan ended")
+//            attachment = nil
+//        default: break
+//        }
+//    }
     
-    @IBAction func pan(sender: UIPanGestureRecognizer) {
-        let gesturePoint = sender.locationInView(gameView)
-        switch sender.state {
-        case .Began:
-            print("Handle pan began")
-            if !currentBlocks.isEmpty {
-                attachment = UIAttachmentBehavior(item: currentBlocks[currentBlocks.count-1], attachedToAnchor: gesturePoint)
-            }
-        case .Changed:
-            print("Handle pan changed")
-            attachment?.anchorPoint = gesturePoint
-        case .Ended:
-            print("Handle pan ended")
-            attachment = nil
-        default: break
-        }
-    }
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         animator.addBehavior(blockBehavior)
         
+        currentRound = GameRound(gameDuration: 60, scoreUpdater: {
+            [weak self]
+            (var score) -> Int in
+            print("Score match")
+                
+            self?.blocksCoveringDot(self!.dotView) {
+                blockCount in
+                score += blockCount
+            }
+                
+            self?.gameUpdateLabel.text = "Time Remaining: \(self!.currentRound.timeRemaining) Score: \(score)"
+                
+            return score
+            }, gameOverScenario: {
+//                [weak self] in
+                
+        })
         
         dotView = DotView(frame: CGRect(x: gameView.frame.size.width/2 , y: gameView.frame.size.height/2, width: 40, height: 40))
         gameView.addSubview(dotView)
@@ -177,12 +196,30 @@ class ViewController: UIViewController, UIDynamicAnimatorDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        let motionKit = AppDelegate.Motion.Kit
-        motionKit.getAccelerometerValues(){
-            (x: Double, y: Double, z: Double) in
-            
-            self.blockBehavior.gravity.gravityDirection = CGVector(dx: x, dy: -y)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NSNotificationCenter.defaultCenter().addObserverForName(UIApplicationDidBecomeActiveNotification,
+            object: nil, queue: NSOperationQueue.mainQueue()) {
+                (notification) -> Void in
+                
+                print("Motionkit starts taking accelerometer updates")
+                let motionKit = AppDelegate.Motion.Kit
+                motionKit.getAccelerometerValues(){
+                    [unowned self]
+                    (x: Double, y: Double, z: Double) in
+                    
+                    self.blockBehavior.gravity.gravityDirection = CGVector(dx: x, dy: -y)
+                }
         }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     override func viewDidLayoutSubviews() {
@@ -213,7 +250,6 @@ class ViewController: UIViewController, UIDynamicAnimatorDelegate {
             blockBehavior.addBlock(blockView)
         }
         
-        
         if currentBlocks.count >= numberOfBlocks { //maxBlocks() {
             for _ in numberOfBlocks..<currentBlocks.count {
                 blockBehavior.removeBlock(currentBlocks[0])
@@ -234,20 +270,7 @@ class ViewController: UIViewController, UIDynamicAnimatorDelegate {
         currentBlocks.removeAll()
     }
     
-    func blocksCoveringDot(dotView: UIView, getBlockCount: (Int->Void)? = nil) {
-        
-        var blockCount = 0
-        
-        let subviewsInView = gameView.subviews
-        for view in subviewsInView {
-            if !dotView.isEqual(view) {
-                if CGRectIntersectsRect(dotView.frame, view.frame) {
-                    ++blockCount
-                }
-            }
-        }
-        getBlockCount?(blockCount)
-    }
+    
 
 }
 

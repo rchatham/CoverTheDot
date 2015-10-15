@@ -79,7 +79,6 @@ func blocksCoveringDot(dotView: UIView, getBlockCount: (Int->Void)? = nil) {
 }
 
 
-
 var blocks = 0
 blocksCoveringDot(dot1) {
     blockCount in
@@ -88,4 +87,9 @@ blocksCoveringDot(dot1) {
 }
 blocks
 
-
+blocksCoveringDot(dot2) {
+    (blockCount) -> Void in
+    print(blockCount)
+    blocks = blockCount
+}
+blocks

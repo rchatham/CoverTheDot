@@ -12,28 +12,49 @@ import Foundation
 class GameRound : NSObject {
     
     var gameTimer : NSTimer!
+    var scoreTimer : NSTimer!
+    var timeRemaining : Int
+    var scoreUpdater : (Int->Int) = {
+        (var score) -> Int in
+        return ++score
+    }
+    var shouldEndGame : (Void->()) = {}
     
-    var score = 0
+    var score = 0 {
+        didSet {
+            if timeRemaining > 0 {
+                scoreTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("scoreGame:"), userInfo: nil, repeats: false)
+            }
+        }
+    }
+    func scoreGame(timer: NSTimer) {
+        print("Score game")
+        timeRemaining -= 1
+        score = scoreUpdater(score)
+    }
     
-    init(gameDuration: NSTimeInterval) {
+    init(gameDuration: Int, scoreUpdater updater: (Int->Int), gameOverScenario: (Void->Void)) {
+        timeRemaining = gameDuration
+        scoreUpdater = updater
+        shouldEndGame = gameOverScenario
         super.init()
-        self.gameTimer = NSTimer.scheduledTimerWithTimeInterval(gameDuration,
+        self.gameTimer = NSTimer.scheduledTimerWithTimeInterval(Double(gameDuration),
             target: self, selector: Selector("gameOver:"),
             userInfo: nil, repeats: false)
+        self.scoreTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("scoreGame:"), userInfo: nil, repeats: false)
+
     }
     
-    func updateScore(updater: (Int->Int) ) {
-        score = updater(score)
-    }
     
     func pauseGame() {
     }
     
     func resumeGame() {
-        
     }
     
     func gameOver(sender: NSTimer) {
+        
+        shouldEndGame()
         
     }
 }
