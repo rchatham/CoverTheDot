@@ -21,6 +21,8 @@
 		30247D6D1BCDBD7E00A08F5B /* BezierPathsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30247D6C1BCDBD7E00A08F5B /* BezierPathsView.swift */; settings = {ASSET_TAGS = (); }; };
 		30247D6F1BCDE95200A08F5B /* DotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30247D6E1BCDE95200A08F5B /* DotView.swift */; settings = {ASSET_TAGS = (); }; };
 		30247D711BCE1F4300A08F5B /* GameRound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30247D701BCE1F4300A08F5B /* GameRound.swift */; settings = {ASSET_TAGS = (); }; };
+		3027E97E1BD01132002E7372 /* PauseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3027E97D1BD01132002E7372 /* PauseView.swift */; settings = {ASSET_TAGS = (); }; };
+		3027E9801BD01146002E7372 /* PauseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3027E97F1BD01146002E7372 /* PauseView.xib */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +76,8 @@
 		30247D6C1BCDBD7E00A08F5B /* BezierPathsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BezierPathsView.swift; sourceTree = "<group>"; };
 		30247D6E1BCDE95200A08F5B /* DotView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotView.swift; sourceTree = "<group>"; };
 		30247D701BCE1F4300A08F5B /* GameRound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameRound.swift; sourceTree = "<group>"; };
+		3027E97D1BD01132002E7372 /* PauseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PauseView.swift; sourceTree = "<group>"; };
+		3027E97F1BD01146002E7372 /* PauseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PauseView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +135,8 @@
 				30247D6C1BCDBD7E00A08F5B /* BezierPathsView.swift */,
 				30247D6E1BCDE95200A08F5B /* DotView.swift */,
 				30247D701BCE1F4300A08F5B /* GameRound.swift */,
+				3027E97D1BD01132002E7372 /* PauseView.swift */,
+				3027E97F1BD01146002E7372 /* PauseView.xib */,
 				30247D6A1BCD84E300A08F5B /* BlockBehavior.swift */,
 				30247D381BCD6F3000A08F5B /* Main.storyboard */,
 				30247D3E1BCD6F3000A08F5B /* Assets.xcassets */,
@@ -266,6 +272,7 @@
 				30247D421BCD6F3000A08F5B /* LaunchScreen.storyboard in Resources */,
 				30247D3F1BCD6F3000A08F5B /* Assets.xcassets in Resources */,
 				30247D3A1BCD6F3000A08F5B /* Main.storyboard in Resources */,
+				3027E9801BD01146002E7372 /* PauseView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +300,7 @@
 				30247D371BCD6F3000A08F5B /* ViewController.swift in Sources */,
 				30247D6D1BCDBD7E00A08F5B /* BezierPathsView.swift in Sources */,
 				30247D6F1BCDE95200A08F5B /* DotView.swift in Sources */,
+				3027E97E1BD01132002E7372 /* PauseView.swift in Sources */,
 				30247D6B1BCD84E300A08F5B /* BlockBehavior.swift in Sources */,
 				30247D351BCD6F3000A08F5B /* AppDelegate.swift in Sources */,
 				30247D711BCE1F4300A08F5B /* GameRound.swift in Sources */,

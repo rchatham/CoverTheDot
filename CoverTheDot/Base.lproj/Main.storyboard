@@ -48,6 +48,7 @@
                                 </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="kW1-El-kUY" appends="YES" id="DAj-Wp-7tW"/>
+                                    <outletCollection property="gestureRecognizers" destination="xlh-zK-keN" appends="YES" id="Nr4-ms-Kjc"/>
                                 </connections>
                             </view>
                         </subviews>
@@ -64,6 +65,7 @@
                     <connections>
                         <outlet property="gameUpdateLabel" destination="v1R-5o-vmT" id="iyV-jc-IHo"/>
                         <outlet property="gameView" destination="QsI-j5-dRN" id="LbC-z9-sTw"/>
+                        <outlet property="longPressGesture" destination="xlh-zK-keN" id="CQo-K2-4nw"/>
                         <outlet property="tapGesture" destination="kW1-El-kUY" id="oIF-4e-gIx"/>
                     </connections>
                 </viewController>
@@ -73,8 +75,13 @@
                         <action selector="tap:" destination="BYZ-38-t0r" id="R6v-lJ-sxk"/>
                     </connections>
                 </tapGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="xlh-zK-keN">
+                    <connections>
+                        <action selector="longPress:" destination="BYZ-38-t0r" id="L3a-Sy-tdb"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="245" y="337"/>
+            <point key="canvasLocation" x="256" y="337"/>
         </scene>
     </scenes>
 </document>

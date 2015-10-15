@@ -133,12 +133,41 @@ class ViewController: UIViewController, UIDynamicAnimatorDelegate {
         }
     }
     
-//    @IBOutlet var longPressGesture: UILongPressGestureRecognizer! {
-//        didSet {
-//        }
-//    }
-//    @IBAction func longPress(sender: UILongPressGestureRecognizer) {
-//    }
+    @IBOutlet var longPressGesture: UILongPressGestureRecognizer! {
+        didSet {
+            longPressGesture.minimumPressDuration = 0.5
+            longPressGesture.numberOfTapsRequired = 0
+            longPressGesture.numberOfTouchesRequired = 1
+            longPressGesture.allowableMovement = 10
+        }
+    }
+    
+    @IBAction func longPress(sender: UILongPressGestureRecognizer) {
+        print("Long press")
+        
+        switch sender.state {
+        case .Ended :
+            if currentRound.isPaused {
+                currentRound.resumeGame()
+            } else {
+                currentRound.pauseGame()
+            }
+        case .Began : fallthrough
+        case .Possible : fallthrough
+        case .Changed : fallthrough
+        case .Cancelled : fallthrough
+        case .Failed : break
+        }
+        
+//        currentRound.pauseGame()
+//        let pauseView = PauseView(frame: gameView.frame, resumeHandler: { [unowned self] in
+//            self.currentRound.resumeGame()
+//            })
+//        gameView.addSubview(pauseView)
+        
+    }
+    
+    
     
 //    @IBOutlet var panGesture: UIPanGestureRecognizer! {
 //        didSet {
@@ -185,6 +214,7 @@ class ViewController: UIViewController, UIDynamicAnimatorDelegate {
             return score
             }, gameOverScenario: {
 //                [weak self] in
+                
                 
         })
         
@@ -269,6 +299,8 @@ class ViewController: UIViewController, UIDynamicAnimatorDelegate {
         }
         currentBlocks.removeAll()
     }
+    
+    
     
     
 
