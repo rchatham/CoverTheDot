@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -23,29 +22,15 @@
                                 <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time Remaining: 60 Score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v1R-5o-vmT">
+                                <rect key="frame" x="189" y="571.5" width="220.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QsI-j5-dRN">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time Remaining: 60 Score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v1R-5o-vmT">
-                                        <rect key="frame" x="190" y="571.5" width="220.5" height="20.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="aH5-2q-chW"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="aH5-2q-chW"/>
-                                            </mask>
-                                        </variation>
-                                    </label>
-                                </subviews>
                                 <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstItem="v1R-5o-vmT" firstAttribute="bottom" secondItem="QsI-j5-dRN" secondAttribute="bottomMargin" id="BpT-fr-bj1"/>
-                                    <constraint firstItem="v1R-5o-vmT" firstAttribute="centerX" secondItem="QsI-j5-dRN" secondAttribute="centerX" id="rcD-BQ-ffB"/>
-                                </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="kW1-El-kUY" appends="YES" id="DAj-Wp-7tW"/>
                                     <outletCollection property="gestureRecognizers" destination="xlh-zK-keN" appends="YES" id="Nr4-ms-Kjc"/>
@@ -56,6 +41,8 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="QsI-j5-dRN" secondAttribute="trailing" id="3EH-q4-Urw"/>
                             <constraint firstItem="QsI-j5-dRN" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="3lb-da-Z2r"/>
+                            <constraint firstItem="v1R-5o-vmT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="FUl-DS-UNF"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="v1R-5o-vmT" secondAttribute="bottom" constant="8" symbolic="YES" id="JBF-rh-bdj"/>
                             <constraint firstItem="QRB-SQ-xlC" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="JSS-Lp-LTF"/>
                             <constraint firstItem="QRB-SQ-xlC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="UpW-fb-wxF"/>
                             <constraint firstItem="QsI-j5-dRN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Xqp-SI-WwO"/>

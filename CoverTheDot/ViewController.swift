@@ -19,7 +19,7 @@ class ViewController: UIViewController, UIDynamicAnimatorDelegate {
         }
     }
     
-    var updateTimer = NSTimer()
+//    var updateTimer = NSTimer()
     var currentRound : GameRound! {
         didSet {
         }
@@ -84,11 +84,7 @@ class ViewController: UIViewController, UIDynamicAnimatorDelegate {
         }
     }
     
-    var dotView: DotView! {
-        didSet {
-            
-        }
-    }
+    var dotView: DotView!
     
     
     
@@ -218,8 +214,7 @@ class ViewController: UIViewController, UIDynamicAnimatorDelegate {
                 
         })
         
-        dotView = DotView(frame: CGRect(x: gameView.frame.size.width/2 , y: gameView.frame.size.height/2, width: 40, height: 40))
-        gameView.addSubview(dotView)
+        
         
     }
     
@@ -254,6 +249,11 @@ class ViewController: UIViewController, UIDynamicAnimatorDelegate {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
+        if dotView == nil {
+            dotView = DotView(frame: CGRect(x: gameView.frame.size.width/2 , y: gameView.frame.size.height/2, width: 40, height: 40))
+            gameView.addSubview(dotView)
+        }
         
     }
     
